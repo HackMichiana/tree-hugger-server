@@ -10,6 +10,7 @@ from trees import views
 
 api = Api(api_name='v1')
 api.register(treesapi.TreeResource())
+api.register(treesapi.ImageResource())
 
 urlpatterns = [
     # Examples:
