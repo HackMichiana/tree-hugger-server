@@ -38,3 +38,9 @@ class Tree(models.Model):
     condition = models.CharField(choices=CONDITION_CHOICES, max_length=1, default='U')
     # maintenance
     # species
+
+
+class Image(models.Model):
+    tree = models.ForeignKey(Tree)
+    image = models.ImageField()
+    type = models.CharField(choices=[('T', 'Tree'), ('L', 'Leaf')], max_length=1, default='tree')
