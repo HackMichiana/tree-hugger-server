@@ -11,7 +11,6 @@ It is highly recommended to run this (and all Python apps) under [virualenv](htt
 git clone git@github.com:HackMichiana/tree-hugger-server.git
 cd tree-hugger-server
 pip install -r requirements.txt
-cd tree_hugger
 ./manage.py migrate
 ./manage.py loaddata tree_hugger/fixtures/admin.json
 ./manage.py runserver
