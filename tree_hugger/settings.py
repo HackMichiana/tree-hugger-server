@@ -53,6 +53,7 @@ ROOT_URLCONF = 'tree_hugger.urls'
 
 WSGI_APPLICATION = 'tree_hugger.wsgi.application'
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.shortcuts import render
 from tastypie.api import Api
 
 import trees.api as treesapi
@@ -13,5 +14,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include(api.urls))
+    url(r'^api/', include(api.urls)),
+    url(r'^', render, {'template_name': 'map.html'}),
 ]
