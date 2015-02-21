@@ -14,7 +14,7 @@ class ImageResource(ModelResource):
         resource_name = 'image'
 
 class TreeResource(ModelResource):
-    images = fields.ToManyField(ImageResource, 'image_set', related_name='tree', full=True)
+    images = fields.ToManyField(ImageResource, 'image_set', related_name='tree', full=True, null=True)
     class Meta:
         authorization = Authorization()
         authentication = Authentication()
