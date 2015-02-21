@@ -4,6 +4,7 @@ from django.shortcuts import render
 from tastypie.api import Api
 
 import trees.api as treesapi
+from trees import views
 
 api = Api(api_name='v1')
 api.register(treesapi.TreeResource())
@@ -15,5 +16,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api.urls)),
+    url(r'^upload/', views.upload),
     url(r'^$', render, {'template_name': 'map.html'}),
 ]

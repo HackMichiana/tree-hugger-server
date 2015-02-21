@@ -1,8 +1,12 @@
 from django.contrib import admin
-from trees.models import Tree
+from trees.models import Tree, Image
 
-# Register your models here.
+
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 0
+
 class TreeAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ImageInline]
 
 admin.site.register(Tree, TreeAdmin)
