@@ -32,7 +32,7 @@ CONDITION_CHOICES = (
 class Tree(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
-    accuracy = models.FloatField()
+    accuracy = models.FloatField(default=0)
     diameter = models.CharField(choices=DIAMETER_CHOICES, max_length=2, default='U')
     height = models.CharField(choices=HEIGHT_CHOICES, max_length=1, default='U')
     condition = models.CharField(choices=CONDITION_CHOICES, max_length=1, default='U')
