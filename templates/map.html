@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tree Hugger SB</title>
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
@@ -20,9 +22,24 @@ if(!document.cookie.match('csrftoken=[a-zA-Z0-9]{32}')) {
           zoom: 13
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        google.maps.event.addListener(map, 'click', function(event) {
-           placeMarker(event.latLng);
-        });
+
+        // Request current location
+        navigator.geolocation.getCurrentPosition(function(pos){
+            map.setCenter({lat: pos.coords.latitude, lng: pos.coords.longitude})
+            map.setZoom(15)
+        })
+
+        // Upload Button
+        var uploadButton = document.createElement('input')
+        uploadButton.type = 'file'
+        uploadButton.capture = 'camera'
+        uploadButton.accept = 'image/*'
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(uploadButton)
+        uploadButton.onchange = function(){
+            alert('thanks (maybe this will do something someday)!')
+        }
+
+        // Load tree data and make markers
         d = new XMLHttpRequest()
         d.open('GET', '/api/v1/tree/?limit=1000&format=json', true)
         d.send()
@@ -35,6 +52,10 @@ if(!document.cookie.match('csrftoken=[a-zA-Z0-9]{32}')) {
                 })
             })
         }
+        // Click to add marker (doesn't work currently)
+        google.maps.event.addListener(map, 'click', function(event) {
+           placeMarker(event.latLng);
+        });
         function placeMarker(loc) {
             var marker = new google.maps.Marker({
                 position: loc,
