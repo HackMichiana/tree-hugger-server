@@ -7,6 +7,7 @@ class ImageInline(admin.TabularInline):
     extra = 0
 
 class TreeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'condition', 'height', 'diameter')
     inlines = [ImageInline]
 
 admin.site.register(Tree, TreeAdmin)
