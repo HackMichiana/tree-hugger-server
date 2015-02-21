@@ -29,16 +29,6 @@ if(!document.cookie.match('csrftoken=[a-zA-Z0-9]{32}')) {
             map.setZoom(15)
         })
 
-        // Upload Button
-        var uploadButton = document.createElement('input')
-        uploadButton.type = 'file'
-        uploadButton.capture = 'camera'
-        uploadButton.accept = 'image/*'
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(uploadButton)
-        uploadButton.onchange = function(){
-            alert('thanks (maybe this will do something someday)!')
-        }
-
         // Load tree data and make markers
         d = new XMLHttpRequest()
         d.open('GET', '/api/v1/tree/?limit=1000&format=json', true)
@@ -46,10 +36,9 @@ if(!document.cookie.match('csrftoken=[a-zA-Z0-9]{32}')) {
         d.onload = function(){
             trees = JSON.parse(d.responseText).objects
             trees.forEach(function(tree){
-                new google.maps.Marker({
-                    position: {lat: tree.latitude, lng: tree.longitude},
-                    map: map
-                })
+                var marker = new google.maps.Marker({position: {lat: tree.latitude, lng: tree.longitude}, map: map})
+                marker.id = tree.id
+                addinfowindow(marker)
             })
         }
         // Click to add marker (doesn't work currently)
@@ -57,18 +46,37 @@ if(!document.cookie.match('csrftoken=[a-zA-Z0-9]{32}')) {
            placeMarker(event.latLng);
         });
         function placeMarker(loc) {
-            var marker = new google.maps.Marker({
-                position: loc,
-                map: map
-            });
             var r = new XMLHttpRequest()
-            r.open('POST', '/admin/trees/tree/add/', true);
-            r.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            csrf = document.cookie.match('csrftoken=([a-zA-Z0-9]{32})')[1]
-            r.send('csrfmiddlewaretoken=' + csrf + '&height=0&latitude=' + loc.lat() + '&longitude=' + loc.lng())
+            r.open('POST', '/api/v1/tree/', true);
+            r.setRequestHeader('X-CSRFToken', document.cookie.match('csrftoken=([a-zA-Z0-9]{32})')[1])
+            r.setRequestHeader('Content-Type', 'application/json')
+            r.send(JSON.stringify({latitude: loc.lat(), longitude: loc.lng()}))
+            r.onload = function(){
+                var url = r.getResponseHeader('Location')
+                var marker = new google.maps.Marker({position: loc, map: map})
+                marker.id = url.split('/')[url.split('/').length - 1]
+                addinfowindow(marker)
+            }
         }
       }
       google.maps.event.addDomListener(window, 'load', initialize);
+
+      // Info Window
+      function addinfowindow(marker){
+        google.maps.event.addListener(marker, 'click', function(e) {
+            var infowindow = new google.maps.InfoWindow();
+            infowindow.open(marker.map, marker)
+            // Upload Button
+            var uploadButton = document.createElement('input')
+            uploadButton.type = 'file'
+            uploadButton.capture = 'camera'
+            uploadButton.accept = 'image/*'
+            infowindow.setContent(uploadButton)
+            uploadButton.onchange = function(){
+                alert('thanks (maybe this will do something someday)!')
+            }
+        })
+      }
     </script>
   </head>
   <body>
