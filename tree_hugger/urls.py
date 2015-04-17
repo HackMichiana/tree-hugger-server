@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^api/', include(api.urls)),
     url(r'^upload/', views.upload),
     url(r'^$', render, {'template_name': 'map.html'}),
+    url(r'^add-a-tree/', render, {'template_name': 'add-a-tree.html'}),
 ]
+# urlpatterns += static(settings.STATIC_URL+'bower_components/', document_root=settings.BOWER_COMPONENTS_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

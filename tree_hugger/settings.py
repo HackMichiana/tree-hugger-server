@@ -31,6 +31,8 @@ MEDIA_URL = '/site_media/media/'
 
 STATIC_URL = '/site_media/static/'
 
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
+
 
 # Application definition
 
@@ -41,7 +43,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djangobower',
     'trees'
+)
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootstrap',
+    'font-awesome'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +63,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "djangobower.finders.BowerFinder"
 )
 
 ROOT_URLCONF = 'tree_hugger.urls'
@@ -87,4 +104,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
