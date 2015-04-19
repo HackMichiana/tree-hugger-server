@@ -1,4 +1,90 @@
+{% load staticfiles %}
 <!doctype html>
 <html>
+<head>
+  <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+
+
+  <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
+  <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'lodash/lodash.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'backbone/backbone.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/add-a-tree.js' %}"></script>
+</head>
+
+<div class="container text-center">
+
+  <h1>Hug a Tree</h1>
+
+  <div id="section_diameter">
+    <label>
+      Diameter:
+      <select id="input_diameter" name="input_diameter">
+        <option value="U" selected=true>Unknown</option>
+        <option value="Y">Young</option>
+        <option value="E">Established</option>
+        <option value="M">Maturing</option>
+        <option value="MA">Mature</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="section_height">
+    <label>
+      Height:
+      <select id="input_height" name="input_height">
+        <option value="U" selected=true>Unknown</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="section_condition">
+    <label>
+      Condition:
+      <select id="input_condition" name="input_condition">
+        <option value="U" selected=true>Unknown</option>
+        <option value="E">Excellent</option>
+        <option value="G">Good</option>
+        <option value="F">Fair</option>
+        <option value="P">Poor</option>
+        <option value="D">Dying</option>
+        <option value="X">Dead</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="section_location">
+    <p>
+      Walk up to the tree and press this button to capture the location.
+    </p>
+    <button id="location_button">Get Location!</button>
+    <div>Latitude: <span id="location_latitude"></span></div>
+    <div>Longitude: <span id="location_longitude"></span></div>
+    <div>Accuracy: <span id="location_accuracy"></span></div>
+  </div>
+
+  <div id="section_leaf_photo">
+    <p>
+      Find a leaf and take a picture of it.
+    </p>
+    <input type="file" capture="camera" accept="image/*" id="leaf_photo_input">
+		<img id="leaf_photo_preview">
+  </div>
+
+  <div id="section_tree_photo">
+    <p>
+      Find a position to photograph the entire tree and a take a picture.
+    </p>
+    <input type="file" capture="camera" accept="image/*" id="tree_photo_input">
+		<img id="tree_photo_preview">
+  </div>
+
+</div>
 
 </html>

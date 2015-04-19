@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/site_media/media/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "tree_hugger", "static"),
+)
 STATIC_URL = '/site_media/static/'
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
@@ -48,11 +51,12 @@ INSTALLED_APPS = (
 )
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'underscore',
-    'backbone',
-    'bootstrap',
-    'font-awesome'
+    'jquery#2.1.3',
+    'lodash#3.7.0',
+    'backbone#1.1.2',
+    'bootstrap#3.3.4',
+    'font-awesome#4.3.0',
+    'modernizr#2.8.3'
 )
 
 MIDDLEWARE_CLASSES = (
