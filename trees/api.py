@@ -4,7 +4,6 @@ from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from trees.models import Tree, Image
 
-from string import upper
 from django.http import HttpResponse
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie import http
