@@ -1,7 +1,7 @@
 from tastypie.resources import ModelResource
 from tastypie import fields
 from tastypie.authorization import Authorization
-from tastypie.authentication import Authentication
+from tastypie.authentication import Authentication, ApiKeyAuthentication, MultiAuthentication
 from trees.models import Tree, Image
 
 from django.http import HttpResponse
@@ -11,6 +11,7 @@ from tastypie import http
 
 import pdb
 
+# class ReadAuthorization()
 
 class CORSResource(object):
     """
@@ -55,7 +56,7 @@ class TreeResource(CORSResource, ModelResource):
     images = fields.ToManyField(ImageResource, 'image_set', related_name='tree', full=True, null=True)
     class Meta:
         authorization = Authorization()
-        authentication = Authentication()
+        authentication = ApiKeyAuthentication()
         allowed_methods = ['get', 'post','options']
         queryset = Tree.objects.all()
         resource_name = 'tree'
