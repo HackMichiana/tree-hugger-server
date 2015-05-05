@@ -15,8 +15,11 @@ function captureTreeLocation() {
     function(position) {
       console.log(position);
       $('#location_latitude').text(position.coords.latitude);
+      $('[name=latitude]').val(position.coords.latitude);
       $('#location_longitude').text(position.coords.longitude);
+      $('[name=longitude]').val(position.coords.longitude);
       $('#location_accuracy').text(position.coords.accuracy);
+      $('[name=accuracy]').val(position.coords.accuracy);
     },
     function(err) {
       console.log(err);
