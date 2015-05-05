@@ -21,7 +21,7 @@ class AddATree(CreateView):
     template_name = 'add-a-tree.html'
     success_url = '/'
 
-    def get_form(self, *args, **kwargs):
-        res = super(AddATree, self).get_form(*args, **kwargs)
-        pdb.set_trace()
-        return res;
+    # def get_form(self, *args, **kwargs):
+    #     res = super(AddATree, self).get_form(*args, **kwargs)
+    #     pdb.set_trace()
+    #     return res;
