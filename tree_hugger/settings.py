@@ -36,6 +36,8 @@ STATIC_URL = '/site_media/static/'
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
+LOGIN_REDIRECT_URL = '/';
+
 
 # Application definition
 
@@ -58,7 +60,8 @@ BOWER_INSTALLED_APPS = (
     'backbone#1.1.2',
     'bootstrap#3.3.4',
     'font-awesome#4.3.0',
-    'modernizr#2.8.3'
+    'modernizr#2.8.3',
+    'jasny-bootstrap#3.1.3'
 )
 
 MIDDLEWARE_CLASSES = (

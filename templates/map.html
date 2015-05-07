@@ -6,11 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tree Hugger SB</title>
     <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      html, body, #map_canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        position: relative;
+      }
+      #map_canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      #menu_btn {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        height: 32px;
+        width: 36px;
+      }
     </style>
 
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jasny-bootstrap/dist/css/jasny-bootstrap.min.css' %}">
 
 
     <script>
@@ -23,6 +46,7 @@
     <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'lodash/lodash.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'backbone/backbone.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jasny-bootstrap/dist/js/jasny-bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/backbone-tastypie.js' %}"></script>
     <script src="http://maps.google.com/maps/api/js"></script>
@@ -32,7 +56,7 @@
       //     center: { lat: 41.6725, lng: -86.2},
       //     zoom: 13
       //   };
-      //   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      //   var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
       //
       //   // Request current location
       //   navigator.geolocation.getCurrentPosition(function(pos){
@@ -75,6 +99,19 @@
     </script>
   </head>
   <body>
-<div id="map-canvas"></div>
+    <nav id="navmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+      <a class="navmenu-brand" href="#">Tree Hugger SB</a>
+      <ul class="nav navmenu-nav">
+        <li><a href="#">Add a Tree</a></li>
+        <li><a href="#">Account</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="/accounts/login">Login</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+    <div id="map_canvas"></div>
+    <button id="menu_btn" type="button" data-toggle="offcanvas" data-target="#navmenu" data-canvas="body">
+      <i class="fa fa-bars fa-lg"></i>
+    </button>
   </body>
 </html>

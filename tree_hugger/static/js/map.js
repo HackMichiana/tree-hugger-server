@@ -8,9 +8,24 @@
   function init() {
     var mapOptions = {
       center: { lat: 41.6725, lng: -86.2},
-      zoom: 13
+      zoom: 13,
+      // mapTypeControl: true,
+      // mapTypeControlOptions: {
+      //   style: google.maps.MapTypeControlStyle.DEFAULT,
+      //   mapTypeIds: [
+      //     google.maps.MapTypeId.ROADMAP,
+      //     google.maps.MapTypeId.TERRAIN
+      //   ]
+      // },
+      streetViewControl: false,
+      panControl: false,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL,
+        position: google.maps.ControlPosition.RIGHT_BOTTOM
+      }
     };
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
     // Request current location
     navigator.geolocation.getCurrentPosition(function(pos){
@@ -18,9 +33,12 @@
         map.setZoom(15)
     });
 
-    // fetch trees
-    trees = window.trees = new TreeCollection();
-    trees.fetch({data:{limit:1000}});
+
+    if(USERNAME) {
+      // fetch trees
+      trees = window.trees = new TreeCollection();
+      trees.fetch({data:{limit:1000}});
+    }
   }
 
 
