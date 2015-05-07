@@ -104,14 +104,34 @@
       <ul class="nav navmenu-nav">
         <li><a href="#">Add a Tree</a></li>
         <li><a href="#">Account</a></li>
-        <li><a href="#">About</a></li>
+        <li>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal_about">About</button>
+        </li>
         <li><a href="/accounts/login">Login</a></li>
         <li><a href="#">Logout</a></li>
       </ul>
     </nav>
     <div id="map_canvas"></div>
-    <button id="menu_btn" type="button" data-toggle="offcanvas" data-target="#navmenu" data-canvas="body">
+    <button id="menu_btn" type="button" data-toggle="offcanvas" data-target="#navmenu" >
       <i class="fa fa-bars fa-lg"></i>
     </button>
+
+    <div id="modal_about" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">About</h4>
+          </div>
+          <div class="modal-body">
+            <p>Stuff</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </body>
 </html>
