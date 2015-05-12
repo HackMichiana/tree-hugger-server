@@ -37,8 +37,8 @@
 
 
     <script>
-      var API_KEY = '{{ user.api_key.key }}';
       var USERNAME = '{{ user.username }}';
+      var API_KEY = '{{ user.api_key.key }}';
     </script>
 
     <script type="text/javascript" src="{% static 'modernizr/modernizr.js' %}"></script>
@@ -104,10 +104,8 @@
       <ul class="nav navmenu-nav">
         <li><a href="#">Add a Tree</a></li>
         <li><a href="#">Account</a></li>
-        <li>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal_about">About</button>
-        </li>
+        <!-- Button trigger modal -->
+        <li><a href="#" class="" data-toggle="modal" data-target="#modal_about">About</a></li>
         <li><a href="/accounts/login">Login</a></li>
         <li><a href="#">Logout</a></li>
       </ul>
@@ -116,6 +114,8 @@
     <button id="menu_btn" type="button" data-toggle="offcanvas" data-target="#navmenu" >
       <i class="fa fa-bars fa-lg"></i>
     </button>
+
+
 
     <div id="modal_about" class="modal fade">
       <div class="modal-dialog">
@@ -130,6 +130,26 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="modal_login_signup" class="modal fade" data-backdrop="static" data-keyboard=false>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+            <h3 class="modal-title text-center">Welcome!</h3>
+          </div>
+          <div class="modal-body text-center">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <a href="#" class="btn btn-primary">Sign Up</a>
+              <a href="#" class="btn btn-success">Login</a>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

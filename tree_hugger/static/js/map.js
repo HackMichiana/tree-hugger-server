@@ -39,6 +39,10 @@
       trees = window.trees = new TreeCollection();
       trees.fetch({data:{limit:1000}});
     }
+    // show login
+    else {
+      $('#modal_login_signup').modal('show');
+    }
   }
 
 
