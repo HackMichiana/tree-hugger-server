@@ -4,6 +4,9 @@
 
   var map;
   var trees;
+  var KNOWN_HASHES = {
+    '#add-tree': '#modal_add_tree'
+  }
 
   function init() {
     var mapOptions = {
@@ -33,15 +36,20 @@
         map.setZoom(15)
     });
 
-
-    if(USERNAME) {
-      // fetch trees
-      trees = window.trees = new TreeCollection();
-      trees.fetch({data:{limit:1000}});
-    }
-    // show login
-    else {
+    // If not auth, bail & show login
+    if(!USERNAME) {
       $('#modal_login_signup').modal('show');
+      return;
+    }
+
+
+    // fetch trees
+    trees = window.trees = new TreeCollection();
+    trees.fetch({data:{limit:1000}});
+
+    // if known hash, show modal
+    if(_.has(KNOWN_HASHES, window.location.hash)) {
+      setTimeout(function() { $(KNOWN_HASHES[window.location.hash]).modal('show'); }, 750);
     }
   }
 
