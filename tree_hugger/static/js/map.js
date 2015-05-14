@@ -53,17 +53,38 @@
     }
   }
 
-
   var Tree = Backbone.Model.extend({
     initialize: function(options) {},
+    addInfoWindow: function(marker) {
+      google.maps.event.addListener(marker, 'click', function(e) {
+        var infowindow = new google.maps.InfoWindow();
+        infowindow.open(marker.map, marker)
+        var infoDiv = document.createElement('div')
+        infoDiv.innerHTML = "<h4>An Tree.</h4>"
+          + "Condition: " + marker.data.attributes.condition + "<br />"
+          + "Height class: " + marker.data.attributes.height + "<br />"
+          + "Diameter: " + marker.data.attributes.diameter + "<br />"
+        infowindow.setContent(infoDiv)
+        marker.data.attributes.images.forEach(function(anImage){
+          var img = document.createElement('img')
+          img.src = anImage.image
+          img.style.maxWidth = '128px'
+          img.style.maxHeight = '128px'
+          img.style.padding = '10px'
+          infoDiv.appendChild(img)
+        })
+      })
+    },
     createMarker: function() {
       var marker = new google.maps.Marker({position: {lat: this.get('latitude'), lng: this.get('longitude')}, map: map})
+      marker.data = this;
+      this.addInfoWindow(marker);
       this.set('marker', marker);
     },
     removeMarker: function() {
       this.get('marker').setMap(null);
     }
-  })
+  });
 
   var TreeCollection = Backbone.Collection.extend({
     url: '/api/v1/tree/',
