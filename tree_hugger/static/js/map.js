@@ -84,7 +84,7 @@
     removeMarker: function() {
       this.get('marker').setMap(null);
     }
-  });
+  })
 
   var TreeCollection = Backbone.Collection.extend({
     url: '/api/v1/tree/',
