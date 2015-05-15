@@ -2,14 +2,21 @@ from tastypie.resources import ModelResource
 from tastypie import fields
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication, ApiKeyAuthentication, MultiAuthentication
+from tastypie.models import ApiKey
 from trees.models import Tree, Image
 
+from django.contrib.auth.signals import user_logged_in
 from django.http import HttpResponse
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie import http
 
 
 import pdb
+
+
+def generate_api_key(sender, user, request, **kwargs):
+    ApiKey.objects.get_or_create(user=user)[0].save()
+user_logged_in.connect(generate_api_key)
 
 # class ReadAuthorization()
 
