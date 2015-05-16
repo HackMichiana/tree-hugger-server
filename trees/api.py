@@ -13,12 +13,18 @@ from tastypie import http
 
 import pdb
 
-
 def generate_api_key(sender, user, request, **kwargs):
     ApiKey.objects.get_or_create(user=user)[0].save()
 user_logged_in.connect(generate_api_key)
 
-# class ReadAuthorization()
+class UnauthenticatedGetAllowedAuthentication(ApiKeyAuthentication):
+    """
+    Allows GET requests read-only access
+    """
+    def is_authenticated(self, request, **kwargs):
+        if request.method == 'GET':
+            return True
+        return super(UnauthenicatedGetAllowedAuthentication, self).is_authenticated(request, kwargs)
 
 class CORSResource(object):
     """
@@ -63,7 +69,7 @@ class TreeResource(CORSResource, ModelResource):
     images = fields.ToManyField(ImageResource, 'image_set', related_name='tree', full=True, null=True)
     class Meta:
         authorization = Authorization()
-        authentication = ApiKeyAuthentication()
+        authentication = UnauthenticatedGetAllowedAuthentication()
         allowed_methods = ['get', 'post','options']
         queryset = Tree.objects.all()
         resource_name = 'tree'
