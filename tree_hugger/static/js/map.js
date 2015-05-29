@@ -6,11 +6,20 @@
   var trees;
   var KNOWN_HASHES = {
     '#add-tree': '#modal_add_tree'
+  };
+  var SB_LOCATION;
+  var DEFAULT_ZOOM = 14;
+
+  window.setCenterSB = function () {
+    map.setCenter(SB_LOCATION);
+    map.setZoom(DEFAULT_ZOOM);
   }
 
   function init() {
+    SB_LOCATION = new google.maps.LatLng(41.6725, -86.255278);
+
     var mapOptions = {
-      center: { lat: 41.6725, lng: -86.2},
+      center: SB_LOCATION,
       zoom: 13,
       // mapTypeControl: true,
       // mapTypeControlOptions: {
@@ -28,7 +37,7 @@
         position: google.maps.ControlPosition.RIGHT_BOTTOM
       }
     };
-    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+    window.map = map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
     // Request current location
     navigator.geolocation.getCurrentPosition(function(pos){
@@ -51,6 +60,8 @@
     if(_.has(KNOWN_HASHES, window.location.hash)) {
       setTimeout(function() { $(KNOWN_HASHES[window.location.hash]).modal('show'); }, 750);
     }
+
+    $('#zoom_sb_btn').click(setCenterSB);
   }
 
   var Tree = Backbone.Model.extend({
